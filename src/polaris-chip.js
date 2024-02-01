@@ -52,7 +52,7 @@ export class PolarisChip extends LitElement {
       }
 
       span{
-        background-color: orange;
+        background-color: blue;
         color: black;
         font-size: 24px;
         padding: 16px;
