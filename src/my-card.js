@@ -16,15 +16,40 @@ export class MyCard extends LitElement {
     this.title = 'Pokemon';
     this.image='';
     this.para='I love pokemon';
-    this.button='pokedex'
-    this.link='#'
+    this.button='pokedex';
+    this.link='#';
+    this.fancy = false;
   }
 
   static get styles() 
   {
     return css`
      
-     
+  :host([fancy]) 
+  {
+  display: block;
+  background-color: pink;
+  border: 2px solid fuchsia;
+  box-shadow: 10px 5px 5px red;
+  }
+
+  details summary {
+    text-align: left;
+    font-size: 20px;
+    padding: 8px 0;
+  }
+
+  details[open] summary {
+    font-weight: bold;
+  }
+  
+  details div {
+    border: 2px solid black;
+    text-align: left;
+    padding: 8px;
+    height: 70px;
+    overflow: auto;
+  }
 
      
 #cardlist
@@ -40,10 +65,9 @@ export class MyCard extends LitElement {
   
 }
 
-.card.color-change
-{
-  background-color: blue;
-}
+.change-color {
+        background-color: #70707047;
+      }
 
 .heading{
   font-size: 40px;
@@ -79,18 +103,32 @@ export class MyCard extends LitElement {
     `;
   }
 
+  // put this anywhere on the MyCard class; just above render() is probably good
+  openChanged(e) {
+    console.log(e.newState);
+    if (e.newState === "open") {
+      this.fancy = true;
+    }
+    else {
+      this.fancy = false;
+    }
+  }
+  
   render() {
     return html`<div class="control-wrapper">
 
   </div>
-
-  
-    
   <div id="cardlist">
     <div class="card">
       <div class="heading">${this.title}</div>
       <img src= ${this.image} class = "image" width = 120px height = 120px>
-    <p class="para">${this.para}</p>
+    <!-- put this in your render method where you had details -->
+  <details ?open="${this.fancy}" @toggle="${this.openChanged}">
+  <summary>PokeDex </summary>
+   <div>
+    <slot>${this.para}</slot>
+   </div>
+  </details>
     <a href="${this.link}">
       <button class="btn">${this.button}</button>
       </a>
@@ -107,6 +145,8 @@ export class MyCard extends LitElement {
       para: {type: String},
       button: {type: String},
       link: {type: String },
+      fancy: { type: Boolean, reflect: true },
+
     };
   }
 }

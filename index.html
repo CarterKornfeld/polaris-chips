@@ -47,22 +47,70 @@
     <button id="delete">Delete Last Card</button>
   </h3>
 
- 
-  <my-card title="Fresh Prince" image="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRPgSRgEYJ3lY8Ky8wNqfoJqWe2U2VMe-RIKbO_0HSXGj5sHA-_"></my-card>
+ <div class="cardlist">
+  
   <my-card title = "Blubasaur" para="Grass type starter" image=" https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png" button="To Pokemon 1" link="https://www.pokemon.com/us/pokedex/bulbasaur"  ></my-card>
   <my-card title = "Charmander" para="fire type starter" image=" https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png"  button="To Pokemon 2" link="https://www.pokemon.com/us/pokedex/charmander" ></my-card>
-  <my-card title = "Squirtle" para="water type starter" image=" https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png"  button="To Pokemon 3" link="https://www.pokemon.com/us/pokedex/squirtle">  </my-card>
+  <my-card title = "Squirtle" para="water type starter" image=" https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png"  button="To Pokemon 3" link="https://www.pokemon.com/us/pokedex/squirtle"></my-card>
   <my-card title = "Pikachu" para="Electric type starter" image=" https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png"  button="To Pokemon 4" link="https://www.pokemon.com/us/pokedex/pikachu"></my-card>
-  <my-card title = "Eevee" para="Normal type starter" image=" https://assets.pokemon.com/assets/cms2/img/pokedex/full/133.png"  button="To Pokemon 5" link="https://www.pokemon.com/us/pokedex/eevee"></my-card>
+  <my-card fancy title = "Eevee" para="Normal type starter" image=" https://assets.pokemon.com/assets/cms2/img/pokedex/full/133.png"  button="To Pokemon 5" link="https://www.pokemon.com/us/pokedex/eevee"></my-card>
   
-
+</div>
   <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
 
+<script>
+document.querySelector('#duplicate').addEventListener('click', function(event) {
+  const newCard = document.querySelector('my-card').cloneNode(true)
+  
+  if(document.querySelectorAll('my-card').length < 10)
+    {
+     document.querySelector('.cardlist').appendChild(newCard);
+    }
+ 
+});
+document.querySelector('#changetext').addEventListener('click', function(e) {
+  document.querySelector('my-card').title = "BEST GUY"
+});
 
 
 
+document.querySelector('#changeimage').addEventListener('click', function(e) {
+  document.querySelector('my-card').image = "https://github.com/elmsln.png"
+});
+
+
+document.querySelector('#changebg').addEventListener('click', function(e) 
+{
+  const myCards = document.querySelectorAll('my-card');
+
+      
+myCards.forEach(myCard => {
+  // Accessing shadow DOM
+  const shadowRoot = myCard.shadowRoot;
+  // Selecting all '.card' elements inside shadow DOM
+  const cards = shadowRoot.querySelectorAll('.card');
+
+  cards.forEach(card => {
+    card.classList.toggle('change-color');
+  });
+});
+});
+
+
+document.querySelector('#delete').addEventListener('click', function(e) 
+{
+  console.log(document.querySelectorAll('my-card').length);
+  if(document.querySelectorAll('my-card').length !== 1)
+    {
+     document.querySelector('my-card').remove();
+    }
+ 
+});
+
+
+</script>
 
 
 </body>
