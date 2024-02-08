@@ -23,7 +23,10 @@ export class MyCard extends LitElement {
   static get styles() 
   {
     return css`
-      
+     
+     
+
+     
 #cardlist
 {
   display:inline-flex;
@@ -73,10 +76,6 @@ export class MyCard extends LitElement {
   background-color: lightgreen;
 }
 
-
-      
-      
-
     `;
   }
 
@@ -84,6 +83,8 @@ export class MyCard extends LitElement {
     return html`<div class="control-wrapper">
 
   </div>
+
+  
     
   <div id="cardlist">
     <div class="card">
