@@ -1,7 +1,7 @@
 
 import { LitElement, html, css } from 'lit';
 
-export class Alert extends LitElement {
+export class CampusAlerts extends LitElement {
 
   static get tag() {
     return 'alert-system';
@@ -13,22 +13,23 @@ export class Alert extends LitElement {
   }
 
   static get styles() {
-    
     return css`
     .container
     {
     width: 100%;
-    height: 16px;
+    height: 100px;
     background-color: blue;
     }
 
     `;
   }
 
-  render() {
+  render() 
+  {
     return html`
     
-    <div class="container"></div>
+    <div class="container">
+  </div>
 
 
   </div>`;
@@ -43,5 +44,5 @@ export class Alert extends LitElement {
   }
 }
 
-globalThis.customElements.define(Alert.tag, Alert);
+globalThis.customElements.define(CampusAlerts.tag, CampusAlerts);
 
