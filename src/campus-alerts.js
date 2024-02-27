@@ -52,12 +52,20 @@ export class CampusAlerts extends LitElement {
             background-color:orange;
         }
 
+        .closedContainer
+        {
+          display:flex;
+          align-items: center;
+          justify-content: center;
+           background-color:orange;
+           padding: 20px;
+        }
         .close-toggle-button
         {
           display:flex;
           align-items: center;
           justify-content: center;
-          padding: 40px;
+          padding:20px;
            background-color:orange;
         }
         .open-toggle-button
