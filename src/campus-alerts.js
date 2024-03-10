@@ -14,7 +14,14 @@ export class CampusAlerts extends LitElement {
     this.message = "";
     this.issueLevel="welcome"
     this.date = "Febuary 27th 2024";
-    this.open =false;
+    this.open =true;
+    if(localStorage.getItem('campus-alert-opened-state') =="false")
+    {
+      this.open =false;
+    }
+
+    
+
   }
 
   
@@ -92,6 +99,8 @@ export class CampusAlerts extends LitElement {
 toggleAlert()
 {
 this.open = !this.open;
+localStorage.setItem('campus-alert-opened-state',this.open)
+
 }
 
  openView(colorP, colorB)
