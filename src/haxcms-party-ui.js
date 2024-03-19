@@ -23,6 +23,7 @@ export class PartyUI extends DDD {
           :host {
             display: block;
           }
+          
           .container
           {
             display: inline-flex;
