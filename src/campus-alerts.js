@@ -17,7 +17,7 @@ export class CampusAlerts extends LitElement {
     this.open =true;
     if(localStorage.getItem('campus-alert-opened-state') =="false")
     {
-      this.open =false;
+      this.open = false;
     }
 
     
