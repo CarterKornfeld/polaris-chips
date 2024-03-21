@@ -14,6 +14,7 @@ export class PartyUI extends DDD {
         super();
         this.personName = "";
         this.opened = true;
+        this.party = [];
       }
     
       static get styles() {
@@ -22,34 +23,38 @@ export class PartyUI extends DDD {
           css`
           :host {
             display: block;
+            margin: 10px;
+            
           }
           
           .container
           {
             display: inline-flex;
             flex-direction: row;
-            
 
           }
           .mainBody {
-            height:250px;
-            width:250px;
+            height: 200px;
+            width: 200px;
+            max-width: 400px;
+            max-height: 400px;
             display: flex;
             flex-direction: column;
             background-color: var(--ddd-theme-default-beaverBlue);
             border: var(--ddd-border-lg);
-           
             color: var(--ddd-theme-default-keystoneYellow);
            
         z-index:1;
           }
           .sidebar
           {
-            width:130px;
-            height:200px;
+            max-width: 400px;
+            max-height: 400px;
+            height: 200px;
+            width: 200px;
           }
           .popUp {
-            height:250px;
+            
             display: flex;
             flex-direction: column;
             background-color: var(--ddd-theme-default-potential0);
@@ -57,11 +62,14 @@ export class PartyUI extends DDD {
             color: var(--ddd-theme-default-keystoneYellow);
             position: relative;
             right:200px; /* Initially hidden to the right */
-            transition: right 0.3s ease;
-            z-index:0
+            transition: right 0.8s ease;
+            opacity: 0;
+            z-index:0;
+            
           }
           #nameInput
           {
+            width:50%;
             margin-top:16px;
             display: inline-flex;
             margin: var(--ddd-spacing-1)
@@ -73,7 +81,9 @@ export class PartyUI extends DDD {
           }
           .rpgAdd
           {
+            width: 50%;
             display: inline-flex;
+            
             margin: var(--ddd-spacing-6);
             
         }
@@ -84,20 +94,48 @@ export class PartyUI extends DDD {
             font: var(Roboto (ddd-font-primary) [--ddd-font-primary]);
             
         }
+
+        
+
         :host([opened]) .popUp
         {
           right:0;
+          opacity: 1;
         }
       .headers
       {
         margin:10px;
         
       }
+      .rpgcharecter
+      {
+        display:block;
+      }
+
+      .partyCont
+      {
+        display:flex;
+        flex-direction:row;
         
+      }
+        rpg-character
+        {
+          max-width: 10vw;
+          max-height: 10vh;
+          padding: 8px;
+          margin: 8px;
+        }
         `];
       }
       addToParty()
       {
+        const member = 
+        {
+          name: this.personName,
+        }
+        this.party.push(member);
+        this.requestUpdate();
+
 
       }
       openClick()
@@ -113,23 +151,6 @@ export class PartyUI extends DDD {
         
       }
       
-     /*  popOut()
-      {
-        return html`<div class="control-wrapper">
-    
-      </div>
-       <div class=popUp>
-        <input id="nameInput" type="text" value=${this.personName} @input=${this.updateName}>
-        <rpg-character id="rpg" seed= ${this.personName} style= "height: 100px; width:100px;" >
-      </rpg-character>
-      <button class= "rpgAdd"> Add to Party</button>
-      </div>
-
-      
-        
-      </div>`;
-      }
- */
       main()
       {
         return html`
@@ -140,12 +161,18 @@ export class PartyUI extends DDD {
            place holder
         </div>
         <button class="openPop"  @click="${this.openClick}" > Add character</button>
+        <div class="partCont">
+        ${this.party.map((member) => html`
+        
+        <rpg-character id="${member.name}" seed = "${member.name}" > </rpg-character>
+        `)}
+        </div>
       </div>
       <div class="sidebar">
             <div class=popUp>
               <div class=headers>     </div>
               <input id="nameInput" type="text" value=${this.personName} @input=${this.updateName}>
-             <rpg-character id="rpg" seed= ${this.personName} style= "height: 100px; width:100px;" > </rpg-character>
+             <rpg-character id="rpg" seed= ${this.personName}  > </rpg-character>
             <button class= "rpgAdd" @click="${this.addToParty}" > Add to Party</button>
         </div>
         </div>
@@ -165,6 +192,7 @@ export class PartyUI extends DDD {
         return {
         personName:{type: String, reflect: true},
         opened: {type: Boolean, reflect:true},
+        party: {type: Array},
         };
       }
 }
