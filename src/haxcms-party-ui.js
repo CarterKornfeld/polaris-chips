@@ -13,7 +13,7 @@ export class PartyUI extends DDD {
       constructor() {
         super();
         this.personName = "";
-        this.opened = false;
+        this.opened = true;
       }
     
       static get styles() {
@@ -88,7 +88,11 @@ export class PartyUI extends DDD {
         {
           right:0;
         }
-      
+      .headers
+      {
+        margin:10px;
+        
+      }
         
         `];
       }
@@ -135,7 +139,8 @@ export class PartyUI extends DDD {
       </div>
       <div class="sidebar">
             <div class=popUp>
-             <input id="nameInput" type="text" value=${this.personName} @input=${this.updateName}>
+              <div class=headers>     </div>
+              <input id="nameInput" type="text" value=${this.personName} @input=${this.updateName}>
              <rpg-character id="rpg" seed= ${this.personName} style= "height: 100px; width:100px;" > </rpg-character>
             <button class= "rpgAdd" > Add to Party</button>
         </div>
