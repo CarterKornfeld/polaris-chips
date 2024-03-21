@@ -96,7 +96,6 @@ export class PartyUI extends DDD {
         }
 
         
-
         :host([opened]) .popUp
         {
           right:0;
