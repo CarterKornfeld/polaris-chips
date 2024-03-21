@@ -96,6 +96,10 @@ export class PartyUI extends DDD {
         
         `];
       }
+      addToParty()
+      {
+
+      }
       openClick()
       {
         
@@ -142,7 +146,7 @@ export class PartyUI extends DDD {
               <div class=headers>     </div>
               <input id="nameInput" type="text" value=${this.personName} @input=${this.updateName}>
              <rpg-character id="rpg" seed= ${this.personName} style= "height: 100px; width:100px;" > </rpg-character>
-            <button class= "rpgAdd" > Add to Party</button>
+            <button class= "rpgAdd" @click="${this.addToParty}" > Add to Party</button>
         </div>
         </div>
         
