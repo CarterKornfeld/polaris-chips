@@ -38,7 +38,7 @@ export class PartyUI extends DDD {
             
           }
           .mainBody {
-            max-width: 100%;
+            width: 300px;
             display: flex;
             flex-direction: column;
             background-color: var(--ddd-theme-default-beaverBlue);
@@ -116,7 +116,7 @@ export class PartyUI extends DDD {
         flex-direction:row;
         flex-shrink: 2;
       }
-        rpg-character
+      rpg-character
         {
           max-width: 100px;
           max-height: 100px;
@@ -208,7 +208,7 @@ export class PartyUI extends DDD {
         ${this.party.map((member) => html`
         
         <rpg-character id="${member.id}" @click="${this.targetClicked}" seed = "${member.name}" > </rpg-character>
-        <div style= 'font-size:16px; text-align:center; margin-top:4px;' > ${member.name}</div>
+        <div style= 'font-size:16px; text-align:center;' > ${member.name}</div>
         `)}
         </div>
       </div>
