@@ -167,9 +167,7 @@ export class PartyUI extends DDD {
    
       updateName(event)
       {
-    
-        this.personName = event.target.value;
-        
+          this.personName = event.target.value;
       }
 
       
