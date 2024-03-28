@@ -32,21 +32,58 @@ export class PartyUI extends DDD {
           {
             display: inline-flex;
             flex-direction: row;
-            padding: 8px;
-            margin: 8px;
             
             
           }
           .mainBody {
-            width: 300px;
-            display: flex;
-            flex-direction: column;
-            background-color: var(--ddd-theme-default-beaverBlue);
-            border: var(--ddd-border-lg);
-            color: var(--ddd-theme-default-keystoneYellow);
+            max-width: 660px;
+            min-width: 250px;
+            background-color:blue;
             z-index:1;
+            align-items: center;
           }
-          
+          .partCont
+          {
+            display:flex;
+            flex-direction:row;
+            margin: 8px;
+            height: 150px;
+            width: 20%;
+          }
+          .buttonCont
+          {
+            width:100%;
+            display:flex;
+            flex-direction:row;
+          }
+.openPop 
+{
+  width: 30%;
+}
+.saveButton
+{
+  width: 30%;
+}
+
+#big-break
+{
+  width:10%;
+}
+#small-break
+{
+  width:20%;
+}
+#rpg
+{
+width:100px;
+height:95px;
+}
+
+rpg-character{
+  width: 100%;
+  height: 100%;
+}
+    
           .popUp {
             
             display: flex;
@@ -95,36 +132,13 @@ export class PartyUI extends DDD {
           right:0;
           opacity: 1;
         }
+        
       .headers
       {
         margin:10px;
         
       }
-      .rpgcharecter
-      {
-        display:block;
-
-      }
-      #underName
-      {
-        align-self:center;
-      }
-
-      .partyCont
-      {
-        display:flex;
-        flex-direction:row;
-        flex-shrink: 2;
-      }
-      rpg-character
-        {
-          max-width: 100px;
-          max-height: 100px;
-          padding: 8px;
-          margin: 8px;
-          height:100%;
-          width:100%;
-        }
+      
         
         `];
       }
@@ -139,7 +153,7 @@ export class PartyUI extends DDD {
           id: randomNumber,
         }
         this.party.push(member);
-        this.makeItRain();
+       
         this.requestUpdate();
       }
       targetClicked(e) {
@@ -197,11 +211,12 @@ export class PartyUI extends DDD {
         return html`
     
     <div class ="container">
+    
       <div class="mainBody">
+      <confetti-container id="confetti">
         <div class="header">
            place holder
         </div>
-        <button class="openPop"  @click="${this.openClick}" > Add character</button>
         <div class="partCont">
         ${this.party.map((member) => html`
         
@@ -209,18 +224,25 @@ export class PartyUI extends DDD {
         <div style= 'font-size:16px; text-align:center;' > ${member.name}</div>
         `)}
         </div>
+        <div class="buttonCont">
+        <div id="big-break"></div>
+        <button class="openPop"  @click="${this.openClick}" > Add character</button>
+        <div id="small-break"></div>
+        <button class="saveButton" @click = "${this.makeItRain}"> Save</button>
+        <div id="big-break"></div>
       </div>
+        </confetti-container>
+      </div>
+      
       <div class="sidebar">
-      <confetti-container id="confetti">
+      
         <div class=popUp>
         
             <input id="nameInput" type="text" value=${this.personName} @input=${this.updateName}>
             <rpg-character id="rpg" seed= ${this.personName}  > </rpg-character>
             
             <button class= "rpgAdd" @click="${this.addToParty}" > Add to Party</button>
-            
         </div>
-        </confetti-container>
       </div>     
     </div>
 
