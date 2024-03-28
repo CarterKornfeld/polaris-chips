@@ -3,6 +3,7 @@
 import { html, css } from "lit";
 import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 import "@lrnwebcomponents/rpg-character/rpg-character.js";
+import copy from 'rollup-plugin-copy';
 
 
 export class PartyUI extends DDD {
