@@ -192,10 +192,12 @@ rpg-character{
       }
       addToParty()
       {
+        
         for(let i = 0; i < this.party.length; i++){
 
           if(this.party[i].name === this.personName){
-            break;
+            alert('This name is already used');
+            return;
           }
       }
         const randomNumber = globalThis.crypto.getRandomValues(new Uint32Array(1))[0];
@@ -205,15 +207,21 @@ rpg-character{
           name: this.personName,
           id: randomNumber,
         }
+        if(this.personName.length ===0)
+        {
+          alert(`empty name is not allowed`);
+          return;
+
+        }
         this.party.push(member);
-       
         this.requestUpdate();
+        this.shadowRoot.getElementById("nameInput").focus();
       }
       targetClicked(e) {
         let value = e.target.id;
         // console.log(this.party);
         // console.log(e.target.id);
-
+        
         for(let i = 0; i < this.party.length; i++){
 
             if(this.party[i].id == e.target.id){
@@ -222,9 +230,27 @@ rpg-character{
               break;
             }
         }
+       
+
       }
       
+      handleInput(event)
+      {
+        var userInput = event.target.value;
+        userInput = userInput.slice(0,7);
 
+        const invalidChar = userInput.match(/[^a-z0-9]/g)
+        console.log(userInput.length)
+        if(invalidChar)
+        {
+          alert(`The character '${invalidChar[0]}' is not allowed`);
+          userInput = userInput.replace(invalidChar[0], '');
+
+        }
+
+        event.target.value = userInput;
+
+      }
 
       openClick()
       {
@@ -235,6 +261,18 @@ rpg-character{
       updateName(event)
       {
           this.personName = event.target.value;
+      }
+     
+      saveFunction()
+      {
+        this.makeItRain();
+
+        var nameList = "";
+        for(let i = 0; i < this.party.length; i++){
+          nameList +=  ` ${this.party[i].name},`
+        }
+        
+        alert(nameList.slice(0,nameList.length-1));
       }
 
       
@@ -283,9 +321,9 @@ rpg-character{
         </div>
         <div class="buttonCont">
         <div id="big-break"></div>
-        <button class="openPop"  @click="${this.openClick}" > Add character</button>
+        <button class="openPop"   @click="${this.openClick}" > Add character</button>
         <div id="small-break"></div>
-        <button class="saveButton" @click = "${this.makeItRain}"> Save</button>
+        <button class="saveButton"  @click = "${this.saveFunction}" > Save</button>
         <div id="big-break"></div>
       </div>
         </confetti-container>
@@ -295,10 +333,10 @@ rpg-character{
       
         <div class=popUp>
         
-            <input id="nameInput" type="text" value=${this.personName} @input=${this.updateName}>
+            <input id="nameInput" type="text" value=${this.personName} @input=${this.updateName} @keyup=${this.handleInput}>
             <rpg-character id="rpg" seed= ${this.personName}  > </rpg-character>
             
-            <button class= "rpgAdd" @click="${this.addToParty}" > Add to Party</button>
+            <button class= "rpgAdd" @click="${this.addToParty}" ?disabled="${this.party.length >=5}"> Add to Party</button>
         </div>
       </div>     
     </div>
