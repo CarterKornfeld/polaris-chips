@@ -3,7 +3,7 @@
 import { html, css } from "lit";
 import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 import "@lrnwebcomponents/rpg-character/rpg-character.js";
-import copy from 'rollup-plugin-copy';
+
 
 
 export class PartyUI extends DDD {
@@ -37,7 +37,7 @@ export class PartyUI extends DDD {
             
           }
           .mainBody {
-            max-width: 660px;
+            max-width: 680px;
             min-width: 250px;
             background-color:blue;
             z-index:1;
@@ -47,10 +47,14 @@ export class PartyUI extends DDD {
           {
             display:flex;
             flex-direction:row;
-            margin: 8px;
+            margin-right: 60px;
             height: 150px;
-            width: 20%;
+            min-width: 100px;
+            max-width: 650px;
+            margin-bottom: 8px;
           }
+        
+
           .buttonCont
           {
             width:100%;
@@ -60,10 +64,12 @@ export class PartyUI extends DDD {
 .openPop 
 {
   width: 30%;
+  
 }
 .saveButton
 {
   width: 30%;
+  
 }
 
 #big-break
@@ -81,7 +87,7 @@ height:95px;
 }
 
 rpg-character{
-  width: 100%;
+  width: 100px;
   height: 100%;
 }
     
@@ -119,7 +125,8 @@ rpg-character{
             width: 50%;
             display: inline-flex;
             align-self: center;
-            margin: 16px;
+            margin: 32px;
+            
         }
         .header
         {
@@ -139,13 +146,58 @@ rpg-character{
         margin:10px;
         
       }
+
+      .tooltip {
+        position: relative;
+        display: inline-block; /* Add a dotted bottom border to indicate hoverable area */
+        cursor: pointer; /* Change cursor to indicate hoverable area */
+        margin-bottom:8px;
+    }
+    
+    /* Define styles for the tooltip text */
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 60px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 10px 0;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -90px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        font-size:12px;
+    }
+    
+    /* Show the tooltip text when hovering over the tooltip container */
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
       
+    .charectername
+    {
+     font-size:16px;
+      text-align:center;
+      margin-top: -32px;
+      margin-left:8px;
+      z-index:0;
+      
+    }
         
         `];
       }
       addToParty()
       {
-        
+        for(let i = 0; i < this.party.length; i++){
+
+          if(this.party[i].name === this.personName){
+            break;
+          }
+      }
         const randomNumber = globalThis.crypto.getRandomValues(new Uint32Array(1))[0];
 
         const member = 
@@ -218,12 +270,16 @@ rpg-character{
         <div class="header">
            place holder
         </div>
-        <div class="partCont">
-        ${this.party.map((member) => html`
+        <div class="partCont" data-tooltip = "Click to Delete">
         
-        <rpg-character id="${member.id}" @click="${this.targetClicked}" seed = "${member.name}" > </rpg-character>
-        <div style= 'font-size:16px; text-align:center;' > ${member.name}</div>
+        ${this.party.map((member) => html`
+        <div class="tooltip">
+        <rpg-character id="${member.id}" @click="${this.targetClicked}" seed = "${member.name}" >  </rpg-character>
+        <span class="tooltiptext">Click to Delete</span>
+        <div class="charectername"> ${member.name}</div>
+</div>
         `)}
+    
         </div>
         <div class="buttonCont">
         <div id="big-break"></div>
