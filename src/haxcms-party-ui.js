@@ -283,6 +283,7 @@ rpg-character{
         }
         
         alert(nameList.slice(0,nameList.length-1));
+        console.log(nameList.slice(0,nameList.length-1))
       }
 
       
@@ -331,7 +332,7 @@ rpg-character{
         </div>
         <div class="buttonCont">
         <div id="big-break"></div>
-        <button class="openPop"   @click="${this.openClick}" > Add character</button>
+        <button class="openPop"   @click="${this.openClick}" > Open Party Creator</button>
         <div id="small-break"></div>
         <button class="saveButton"  @click = "${this.saveFunction}" > Save</button>
         <div id="big-break"></div>
