@@ -25,7 +25,7 @@ export class PartyUI extends DDD {
           css`
           :host {
             display: block;
-            margin: 10px;
+            margin: var(--ddd-spacing-2);
             
           }
           
@@ -39,19 +39,23 @@ export class PartyUI extends DDD {
           .mainBody {
             max-width: 680px;
             min-width: 250px;
-            background-color:blue;
+            background-color: var(--ddd-theme-default-skyLight);
             z-index:1;
             align-items: center;
+            border: var(--ddd-border-lg);
+            border-color: var(--ddd-theme-default-navy40)
+            
           }
           .partCont
           {
             display:flex;
             flex-direction:row;
-            margin-right: 60px;
+            margin-right: var(--ddd-spacing-15);
             height: 150px;
             min-width: 100px;
             max-width: 650px;
-            margin-bottom: 8px;
+            margin-bottom: var(--ddd-spacing-2);
+            
           }
         
 
@@ -95,10 +99,11 @@ rpg-character{
             
             display: flex;
             flex-direction: column;
-            background-color: var(--ddd-theme-default-potential0);
-            border: var(--ddd-border-lg);
-            color: var(--ddd-theme-default-keystoneYellow);
-
+            border-bottom: var(--ddd-border-lg);
+            border-top: var(--ddd-border-lg);
+            border-right: var(--ddd-border-lg);
+            background-color: var(--ddd-theme-default-skyLight); 
+            border-color: var(--ddd-theme-default-navy40);
             /* in and out transtion stuff*/
             position: relative;
             right:200px; /* Initially hidden to the right */
@@ -112,7 +117,7 @@ rpg-character{
             width:50%;
             display: inline-flex;
             align-self: center;
-            margin-top: 8px;
+            margin-top: var(--ddd-spacing-8);
           }
           #rpg
           {
@@ -125,14 +130,14 @@ rpg-character{
             width: 50%;
             display: inline-flex;
             align-self: center;
-            margin: 32px;
+            margin: var(--ddd-spacing-8);
             
         }
         .header
         {
-            background-color:var(--ddd-theme-default-keystoneYellow);
-            color: blue;
-            font: var(Roboto (ddd-font-primary) [--ddd-font-primary]);   
+            background-color:var(--ddd-theme-default-slateLight);
+            color: black;
+            text-align: center;
         }
 
         :host([opened]) .popUp
@@ -141,25 +146,21 @@ rpg-character{
           opacity: 1;
         }
         
-      .headers
-      {
-        margin:10px;
-        
-      }
+      
 
       .tooltip {
         position: relative;
         display: inline-block; /* Add a dotted bottom border to indicate hoverable area */
         cursor: pointer; /* Change cursor to indicate hoverable area */
-        margin-bottom:8px;
+        margin-bottom:var(--ddd-spacing-2);;
     }
     
     /* Define styles for the tooltip text */
     .tooltip .tooltiptext {
         visibility: hidden;
         width: 60px;
-        background-color: #555;
-        color: #fff;
+        background-color: var(--ddd-theme-default-coalyGray);
+        color: var(--ddd-theme-default-white);
         text-align: center;
         border-radius: 6px;
         padding: 10px 0;
@@ -180,17 +181,23 @@ rpg-character{
       
     .charectername
     {
+      font: var(Roboto Slab (ddd-font-secondary) [--ddd-font-secondary]);
      font-size:16px;
       text-align:center;
       margin-top: -32px;
-      margin-left:8px;
+      margin-left:var(--ddd-spacing-2);
       z-index:0;
       
+    }
+    .header1
+    {
+      background-color: var(--ddd-theme-default-coalyGray);
+      visibility: visible;
     }
         
         `];
       }
-      addToParty()
+      addToParty(event)
       {
         
         for(let i = 0; i < this.party.length; i++){
@@ -215,7 +222,10 @@ rpg-character{
         }
         this.party.push(member);
         this.requestUpdate();
+
+        this.shadowRoot.getElementById("nameInput").value = "";
         this.shadowRoot.getElementById("nameInput").focus();
+        
       }
       targetClicked(e) {
         let value = e.target.id;
@@ -306,7 +316,7 @@ rpg-character{
       <div class="mainBody">
       <confetti-container id="confetti">
         <div class="header">
-           place holder
+           Build Your Party
         </div>
         <div class="partCont" data-tooltip = "Click to Delete">
         
